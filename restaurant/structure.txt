@@ -1,0 +1,69 @@
+This .txt file is in the restaurant folder with the following structure:
+
+restaurant
+|   src
+    |   front_of_house
+        |   hosting.rs
+    
+    |   front_of_house.rs
+
+    |   bin.rs
+
+    |   lib.rs
+
+|   target
+    |   [...]
+
+|   Cargo.toml
+
+|   Cargo.lock
+
+The restaurant directory was created on the command line by entering:
+    "cargo new restaurant"
+which automatically created a package called restaurant, and which held
+the src/ and target/ folders, and the Cargo.* files.
+
+A package is an entire project typcially, and contains one or more crates
+which are groups of functionality. There are two types of crate:
+
+    - Binary crates contain a binary file that can be executed. This file
+    must have a "main" function and is often called "main.rs" or "bin.rs"
+
+    - Library crates cannot be executed and exist to group functionality 
+    together and have it be used by binary crates.
+
+When a binary crate is created (like above) it is automatically given a 
+"main.rs" file in the src/ folder, and cargo assumes this to be the root 
+of the binary crate. To change this, Cargo.toml must be updated as follows:
+
+    [[bin]]
+    name = "bin_name_enter_here"
+    path = "path to bin crate root, probably src/bin.rs or something"
+
+When a library crate is created (like above but with a --lib after the new
+keyword) it is automatically given a "lib.rs" file in the src/ folder, and
+cargo assumes this to be the root of the library crate.
+
+A package can contain the following numbers and types of crates:
+    - One or zero bin crates
+    - Any number (including zero) of lib crates
+as long as there is at least one crate of some kind.
+
+If a package has a bin crate and one or more lib crates that it needs to 
+use, it must have those lib crates specified in Cargo.toml as follows:
+
+    [lib]
+    name = "lib_name_enter_here"
+    path = "path to lib crate root, probably src/lib.rs or something"
+
+In this package, called "restaurant", there is one bin and one lib crate.
+
+According to the Cargo.toml file, they are simply called "bin" and "lib"
+and there roots are "src/bin.rs" and "src/lib.rs", respectively.
+
+The lib crate contains also front_of_house.rs, and the contents of the 
+"src/front_of_house/" folder.
+
+The bin crate is able to access this functionality because of two things:
+    - The lib crate is declared as a library in the Cargo.toml file
+    - It has a "use" statement where it brings the library into scope.
