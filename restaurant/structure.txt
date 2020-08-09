@@ -44,19 +44,12 @@ When a library crate is created (like above but with a --lib after the new
 keyword) it is automatically given a "lib.rs" file in the src/ folder, and
 cargo assumes this to be the root of the library crate.
 
-A package can contain the following numbers and types of crates:
-    - One or zero bin crates
-    - Any number (including zero) of lib crates
-as long as there is at least one crate of some kind.
-
-If a package has a bin crate and one or more lib crates that it needs to 
-use, it must have those lib crates specified in Cargo.toml as follows:
+If a package has a bin crate and a lib crate that it needs to 
+use, it must have that lib crate specified in Cargo.toml as follows:
 
     [lib]
     name = "lib_name_enter_here"
     path = "path to lib crate root, probably src/lib.rs or something"
-
-In this package, called "restaurant", there is one bin and one lib crate.
 
 According to the Cargo.toml file, they are simply called "bin" and "lib"
 and there roots are "src/bin.rs" and "src/lib.rs", respectively.

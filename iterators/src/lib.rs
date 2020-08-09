@@ -13,6 +13,8 @@
 // Unless it's definitely needed, don't use Eq as it is more
 // difficult and must be implemented by you, not the compiler
 
+pub mod my_vector;
+
 #[derive(PartialEq, Debug)]
 struct Shoe {
     size: u32,

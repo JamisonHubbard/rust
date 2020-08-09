@@ -4,11 +4,8 @@ use std::process;
 use lib::*;
 
 fn main() {
-    // collecting args
-    let args: Vec<String> = env::args().collect();
-
     // parse args
-    let config = Config::new(&args)
+    let config = Config::new(env::args())
         .unwrap_or_else(|err| {
             eprintln!("problem parsing args: {}", err);
             process::exit(1);
