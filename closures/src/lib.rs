@@ -6,6 +6,20 @@ use std::collections::HashMap;
 // Uses a hashmap to only complete an expensive calculation
 // when it hasn't already been done for that input
 
+/// Stores a closure with generic parameter A and generic return
+/// type B. Also stores a HashMap of previously calculated results
+/// of the closure
+/// 
+/// # Examples
+/// 
+/// ```
+/// let mut my_cache = lib::Cache::new(|&x| x);
+/// 
+/// let a = my_cache.value(5);  // calculates using closure
+/// let b = my_cache.value(5);  // pulls from HashMap
+/// 
+/// assert_eq!(a, b);
+/// ```
 pub struct Cache<A, B, T> where 
     T: Fn(&A) -> B,
     A: std::cmp::Eq + std::hash::Hash,
@@ -20,6 +34,12 @@ impl<A, B, T> Cache<A, B, T> where
     A: std::cmp::Eq + std::hash::Hash,
     B: Copy
 {
+    /// Returns a new instance of the Cache struct
+    /// 
+    /// Examples
+    /// ```
+    /// let my_cache = lib::Cache::new(|x| x + 1);
+    /// ```
     pub fn new(calculation: T) -> Cache<A, B, T> {
         let new_map: HashMap<A, B> = HashMap::new();
         
@@ -29,6 +49,20 @@ impl<A, B, T> Cache<A, B, T> where
         }
     }
 
+    /// Returns the result of the Cache's closure with 
+    /// the given parameter. 
+    /// 
+    /// If the value has already been calculated it is
+    /// pulled from a HashMap, otherwise the closure is
+    /// called.
+    /// 
+    /// Examples
+    /// ```
+    /// let mut my_cache = lib::Cache::new(|x| x + 1);
+    /// let my_value = my_cache.value(5);
+    /// 
+    /// assert_eq!(my_value, 6);
+    /// ```
     pub fn value(&mut self, arg: A) -> B {
         match self.values.get(&arg) {
             Some(&v) => v,

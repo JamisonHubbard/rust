@@ -1,18 +1,3 @@
-// the below derive command is a compiler command
-// it tells the compiler to implement the PartialEq
-// and Debug traits for the Shoe struct
-//
-// Debug allows the struct to be printed in a standard
-// format
-//
-// PartialEq allows instances of the Shoe struct to be
-// compared for equality
-//
-// Eq is the trait for absolute equality, whereas PartialEq
-// is for partial equality and is less rigorous
-// Unless it's definitely needed, don't use Eq as it is more
-// difficult and must be implemented by you, not the compiler
-
 pub mod my_vector;
 
 #[derive(PartialEq, Debug)]
